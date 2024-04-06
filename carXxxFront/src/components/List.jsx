@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { carsList } from "../services/CarService"
+import { carsList, deleteCar } from "../services/CarService"
 import { useNavigate } from "react-router-dom"
 
 const List = () => {
@@ -8,16 +8,34 @@ const List = () => {
     const navigator = useNavigate();
 
     useEffect(() => {
+        getAllCars();
+    }, [])
+
+    function getAllCars() {
         carsList().then((response) => {
             setCars(response.data);
         }).catch(error => {
             console.error(error);
         })
-    }, [])
+    }
 
     function addNewCar() {
         navigator('/addcar');
 
+    }
+
+    function updateCar(id) {
+        navigator(`/editcar/${id}`);
+    }
+
+    function removeCar(id) {
+        console.log(id);
+
+        deleteCar(id).then((response) => {
+            getAllCars();
+        }).catch(error => {
+            console.error(error);
+        })
     }
 
 
@@ -33,6 +51,7 @@ const List = () => {
                         <th>Car Plate Number</th>
                         <th>Car Make</th>
                         <th>Car Model</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +62,10 @@ const List = () => {
                                 <td>{car.plateNumber}</td>
                                 <td>{car.make}</td>
                                 <td>{car.model}</td>
+                                <td>
+                                    <button className="bt btn-info" onClick={() => updateCar(car.id)}>Update</button>
+                                    <button className="bt btn-danger" color="red" onClick={() => removeCar(car.id)}>Delete</button>
+                                </td>
                             </tr>
                         )
                     }

@@ -20,6 +20,8 @@ function App() {
           <Route path='/allcars' element={<List />}></Route>
           {/* // http://localhost:3000/addcar */}
           <Route path='/addcar' element={<CarComponent />}></Route>
+          {/* // http://localhost:3000/update/1 */}
+          <Route path='/editcar/:id' element={<CarComponent />}></Route>
         </Routes>
         <FooterComponet />
       </BrowserRouter>

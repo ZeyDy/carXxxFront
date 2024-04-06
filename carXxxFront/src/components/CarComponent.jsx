@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
-import { createCar } from '../services/CarService'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { changeCar, createCar, getCar } from '../services/CarService'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const CarComponent = () => {
 
     const [plateNumber, setPlateNumber] = useState('');
     const [make, setMake] = useState('');
     const [model, setModel] = useState('');
+
+    const { id } = useParams();
 
     const [errors, setErrors] = useState({
         plateNumber: '',
@@ -16,21 +18,43 @@ const CarComponent = () => {
 
     const navigator = useNavigate();
 
-    function saveCar(e) {
+    useEffect(() => {
+        if (id) {
+            getCar(id).then((response) => {
+                setPlateNumber(response.data.plateNumber);
+                setMake(response.data.make);
+                setModel(response.data.model);
+            }).catch(error => {
+                console.error(error);
+            })
+        }
+    }, [id])
+
+    function saveOrChangeCar(e) {
         e.preventDefault();
         if (validateForm()) {
+
             const car = { plateNumber, make, model };
             console.log(car);
 
-            createCar(car).then((response) => {
-                console.log(response.data);
-                navigator('/allcars');
-            })
-
+            if (id) {
+                changeCar(id, car).then((response) => {
+                    console.log(response.data);
+                    navigator('/allcars');
+                }).catch(error => {
+                    console.error(error);
+                })
+            } else {
+                createCar(car).then((response) => {
+                    console.log(response.data);
+                    navigator('/allcars');
+                }).catch(error => {
+                    console.error(error);
+                })
+            }
         }
-
-
     }
+
     function validateForm() {
         let valid = true;
         const errorsCopy = { ...errors };
@@ -61,11 +85,21 @@ const CarComponent = () => {
 
     }
 
+    function pageTitle() {
+        if (id) {
+            return <h2 className='text-center'>Update Car</h2>
+        } else {
+            return <h2 className='text-center'>Add Car</h2>
+        }
+    }
+
     return (
         <div className='container'>
             <div className='row'>
                 <div className='card col-md-6 offset-md-3'>
-                    <h2 className='text-center'>Add car</h2>
+                    {
+                        pageTitle()
+                    }
                     <div className='card-body'>
                         <form>
                             <div className='form-group mb-2'>
@@ -101,7 +135,7 @@ const CarComponent = () => {
                                 ></input>
                                 {errors.model && <div className='invalid-feedback'> {errors.model}</div>}
                             </div>
-                            <button className='btn btn-success' onClick={saveCar}>Submit</button>
+                            <button className='btn btn-success' onClick={saveOrChangeCar}>Submit</button>
                         </form>
                     </div>
 
