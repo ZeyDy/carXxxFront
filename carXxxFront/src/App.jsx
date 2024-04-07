@@ -5,6 +5,7 @@ import HeaderComponent from './components/HeaderComponent'
 import FooterComponet from './components/FooterComponent'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CarComponent from './components/CarComponent'
+import HomePage from './components/HomePage'
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <HeaderComponent />
+        {/* <HeaderComponent /> */}
+        <HomePage />
         <Routes>
           {/* // http://localhost:3000 */}
           <Route path='/' element={<List />}></Route>
@@ -23,7 +25,7 @@ function App() {
           {/* // http://localhost:3000/update/1 */}
           <Route path='/editcar/:id' element={<CarComponent />}></Route>
         </Routes>
-        <FooterComponet />
+        {/* <FooterComponet /> */}
       </BrowserRouter>
     </>
   )

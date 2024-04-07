@@ -1,3 +1,29 @@
+body,
+body * {
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+  box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.main-body {
+  vertical-align: top;
+}
+
+.stoteles {
+  width: 300px;
+  background-color: #A89565;
+  opacity: 0.9;
+  border: 5px solid black;
+  border-radius: 10px;
+  border-width: 1px;
+  padding: 20px;
+
+
+}
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -6,4 +32,34 @@
   background-color: black;
   text-align: center;
   color: white;
+}
+
+.container {
+  margin-top: 0px;
+  display: inline-block;
+  width: 1000px;
+
+  vertical-align: top;
+}
+
+header.container {
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+  background-color: black;
+}
+
+.logo {
+  height: 60px;
+  margin-right: auto;
+}
+
+.main-container {
+  height: 500px;
+  background-image: url(./assets/carBackground.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right center;
 }
