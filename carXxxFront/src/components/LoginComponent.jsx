@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AuthService from './services/AuthService'; // Įsitikinkite, kad kelias teisingas
+import { signIn } from '../services/CarService'; // Įsitikinkite, kad kelias teisingas
 
 function LoginComponent() {
     const [username, setUsername] = useState('');
@@ -8,7 +8,7 @@ function LoginComponent() {
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
-            const response = await AuthService.login(username, password);
+            const response = await signIn.login(username, password);
             console.log('Prisijungimas sėkmingas:', response);
             // Čia galite nukreipti naudotoją į kitą puslapį arba atnaujinti būseną
         } catch (error) {

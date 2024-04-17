@@ -15,8 +15,11 @@ function App() {
     <>
       <BrowserRouter>
         {/* <HeaderComponent /> */}
-        <HomePage />
+        <LoginComponent />
+
         <Routes>
+          {/* <HomePage /> */}
+          <Route path='/signin' element={<LoginComponent />}></Route>
           {/* // http://localhost:3000 */}
           <Route path='/' element={<List />}></Route>
           {/* // http://localhost:3000/cars */}
@@ -25,7 +28,7 @@ function App() {
           <Route path='/addcar' element={<CarComponent />}></Route>
           {/* // http://localhost:3000/update/1 */}
           <Route path='/editcar/:id' element={<CarComponent />}></Route>
-          {/* <Route path='/signin' element={<LoginComponent />}></Route> */}
+
         </Routes>
         {/* <FooterComponet /> */}
       </BrowserRouter>
