@@ -8,6 +8,7 @@ import CarComponent from './components/CarComponent'
 import HomePage from './components/HomePage'
 import LoginComponent from './components/LoginComponent'
 import RegistrationComponent from './components/RegistrationComponent'
+import SignupForm from './components/SignupForm'
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
           <Route path='/editcar/:id' element={<CarComponent />}></Route>
           {/* // http://localhost:3000/login */}
           <Route path='/login' element={<LoginComponent />}></Route>
-          <Route path='/registration' element={<RegistrationComponent />}></Route>
+          <Route path='/registration' element={<SignupForm />}></Route>
         </Routes>
       </BrowserRouter>
     </>
