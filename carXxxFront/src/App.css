@@ -63,3 +63,47 @@ header.container {
   background-repeat: no-repeat;
   background-position: right center;
 }
+
+.enter-page-container{
+  width: 100vw;
+  background-image: url(./assets/enterPageCover.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right center;
+  display: flex;
+  flex-direction: column; /* Vertikali išdėstymo kryptis */
+  justify-content: center; /* Centruoja elementus vertikaliai */
+  align-items: center; /* Centruoja elementus horizontaliai */
+  height: 100vh; /* Arba nustatykite tam tikrą aukštį */
+}
+
+.enter-page-main{
+  width: 400px;
+    padding: 40px;
+    display: inline-block;
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* background-color: white;
+    opacity: 0.7; */
+}
+
+.enter-page-header{
+  width: 600px;
+  display: ruby;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.text-container{
+  text-align: center;
+  background-color: #A89565;
+  opacity: 0.7;
+  border-radius: 10px;
+  border-width: 1px;
+  padding: 20px;
+  color: black;
+}
