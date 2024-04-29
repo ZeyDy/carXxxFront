@@ -107,3 +107,12 @@ header.container {
   padding: 20px;
   color: black;
 }
+
+.clock-container{
+  color: aliceblue;
+}
+
+.login-error {
+  color: red;
+  margin-top: 10px;
+}

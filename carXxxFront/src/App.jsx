@@ -1,16 +1,13 @@
 
 import './App.css'
 import List from './components/List'
-import HeaderComponent from './components/HeaderComponent'
-import FooterComponet from './components/FooterComponent'
 import { BrowserRouter, Routes, Route  } from 'react-router-dom'
 import CarComponent from './components/CarComponent'
 import HomePage from './components/HomePage'
-import LoginComponent from './components/LoginComponent'
-import RegistrationComponent from './components/RegistrationComponent'
 import SignupForm from './components/SignupForm'
 import LoginForm from './components/LoginForm'
 import EnterPage from './components/EnterPage'
+import MyCars from './components/MyCars'
 
 function App() {
 
@@ -18,11 +15,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <EnterPage/>
+        
         <Routes>
+          <Route path='/enterpage' element={<EnterPage/>}></Route>
           <Route path='/home' element={<HomePage />}></Route>
-          {/* <Route path='/signin' element={<LoginComponent />}></Route>
-          <Route path='/signup' element={<RegistrationComponent />}></Route> */}
           {/* // http://localhost:3000 */}
           <Route path='/' element={<List />}></Route>
           {/* // http://localhost:3000/cars */}
@@ -34,6 +30,8 @@ function App() {
           {/* // http://localhost:3000/login */}
           <Route path='/login' element={<LoginForm />}></Route>
           <Route path='/registration' element={<SignupForm />}></Route>
+          <Route path='/mycars' element={<MyCars />}></Route>
+          
         </Routes>
       </BrowserRouter>
     </>

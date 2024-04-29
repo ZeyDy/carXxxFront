@@ -13,12 +13,12 @@ const HomePage = () => {
                 <DigitalClock />
                 <nav>
                     <a href="#">Home</a>
-                    <a href="#">Your cars</a>
+                    {/* <a href="#">My cars</a> */}
+                    <Link to="/mycars">My Cars</Link>
                     <a href="#">She`s</a>
                     <a href="#">About us</a>
                     <a href="#">Contact us</a>
-                    <Link to="/login">Login</Link>
-                    <Link to="/registration">Register</Link>
+                    <Link to="/login">Log Out</Link>
                 </nav>
             </header>
             <main className="main-container">

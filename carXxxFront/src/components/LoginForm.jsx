@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { signIn } from '../services/CarService'; // arba '../services/CarService', jei ten laikote signIn funkciją
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState('');
   const [loginData, setLoginData] = useState({
     username: '',
     password: ''
@@ -20,12 +23,16 @@ const LoginForm = () => {
     signIn(loginData)
       .then(response => {
         console.log(response.data);
+        localStorage.setItem('accessToken', response.data.accessToken);
         // Čia išsaugokite gautą JWT, pvz., į sessionStorage arba localStorage
         // ir nukreipkite vartotoją į kitą puslapį arba atnaujinkite būseną
+        navigate('/home');
       })
       .catch(error => {
         console.error('Login error:', error);
         // Čia rodykite klaidos pranešimą vartotojui, jei prisijungimas nepavyko
+        setLoginError('Neteisingas vartotojo vardas arba slaptažodis.');
+        
       });
   };
 
@@ -50,6 +57,7 @@ const LoginForm = () => {
         required
       />
       <button type="submit">Login</button>
+      {loginError && <div className="login-error">{loginError}</div>} {/* Čia rodomas klaidos pranešimas */}
     </form>
   );
 };
