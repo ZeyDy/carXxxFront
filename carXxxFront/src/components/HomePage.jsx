@@ -3,9 +3,20 @@ import Logo from '../carxLogo.png'
 import DigitalClock from "./DigitalClock";
 import OruStotelesKomponentas from "./OruStotelesKomponentas";
 import { useNavigate, Link } from "react-router-dom";
+import CarSelection from "./CarSelection";
 
 
 const HomePage = () => {
+
+    const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Išvalyti vartotojo prisijungimo duomenis
+    localStorage.removeItem('accessToken'); // Šalinamas prisijungimo raktas
+    // Galima pašalinti ir kitus duomenis pagal poreikį
+    navigate('/enterpage'); // Nukreipimas į prisijungimo puslapį
+  };
+
     return (
         <div className="main-body">
             <header className="container">
@@ -13,17 +24,17 @@ const HomePage = () => {
                 <DigitalClock />
                 <nav>
                     <a href="#">Home</a>
-                    {/* <a href="#">My cars</a> */}
                     <Link to="/mycars">My Cars</Link>
+                    <Link to="/createcar">Add Car</Link>
                     <a href="#">She`s</a>
                     <a href="#">About us</a>
                     <a href="#">Contact us</a>
-                    <Link to="/login">Log Out</Link>
+                    <button onClick={handleLogout}>Atsijungti</button>
                 </nav>
             </header>
             <main className="main-container">
                 <div className="stoteles"><OruStotelesKomponentas /></div>
-                <div></div>
+                <div><CarSelection/></div>
             </main>
             <footer></footer>
         </div>
