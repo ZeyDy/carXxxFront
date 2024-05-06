@@ -7,7 +7,7 @@ const EnterPage = () => {
             <header className="enter-page-header">
                     <img className="logo" src={Logo} alt="Logo"></img>
                     <h1 className="text-container">
-                        <text color="black">CarX - For today's busy driver who wants to manage all matters related to their car in one place.</text>
+                        CarX - For today's busy driver who wants to manage all matters related to their car in one place.
                     </h1>
             </header>
             <main>

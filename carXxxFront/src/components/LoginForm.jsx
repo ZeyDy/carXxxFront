@@ -38,7 +38,7 @@ const LoginForm = () => {
 
   return (
     <form className='enter-page-main' onSubmit={handleSubmit}>
-      <label for="Username">Username</label>
+      <label htmlFor="Username">Username</label>
       <input
         type="text"
         name="username"
@@ -47,7 +47,7 @@ const LoginForm = () => {
         placeholder="Username"
         required
       />
-      <label for="Password">Password</label>
+      <label htmlFor="Password">Password</label>
       <input
         type="password"
         name="password"

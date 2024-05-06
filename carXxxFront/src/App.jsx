@@ -8,6 +8,7 @@ import SignupForm from './components/SignupForm'
 import LoginForm from './components/LoginForm'
 import EnterPage from './components/EnterPage'
 import MyCars from './components/MyCars'
+import UpdateCarForm from './components/UpdateCarForm'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path='/login' element={<LoginForm />}></Route>
           <Route path='/registration' element={<SignupForm />}></Route>
           <Route path='/mycars' element={<MyCars />}></Route>
+          <Route path='/update/:carId' element={<UpdateCarForm/>}></Route>
           
         </Routes>
       </BrowserRouter>
