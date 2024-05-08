@@ -1,5 +1,6 @@
 import LoginForm from "./LoginForm";
 import Logo from '../carxLogo.png'
+import {  Link } from "react-router-dom";
 
 const EnterPage = () => {
     return (
@@ -11,8 +12,11 @@ const EnterPage = () => {
                     </h1>
             </header>
             <main>
-                <LoginForm/>
-
+                <div className="login-form"><LoginForm/></div>
+                <div className="enter-page-signup-link">
+                    <h1>Don't have an account yet?</h1>
+                    <Link className="link" to="/registration">Sign Up</Link>
+                </div>
             </main>
             <footer>
 

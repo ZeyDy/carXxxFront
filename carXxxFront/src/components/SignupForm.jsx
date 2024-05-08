@@ -1,9 +1,9 @@
-// CHATO
-
 
 import React, { useState } from 'react';
 import axios from 'axios';
 import { signUp } from '../services/CarService';
+import { useNavigate, Link } from 'react-router-dom';
+
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +11,8 @@ const SignupForm = () => {
     email: '',
     password: ''
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,39 +22,24 @@ const SignupForm = () => {
     }));
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault(); // Tai neleidžia puslapiui perkrauti pateikus formą
-
-  //   axios.post('/api/auth/signup', formData, {
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //   .then(response => {
-  //     console.log(response.data);
-  //     // Čia galite apdoroti sėkmingą registraciją, pavyzdžiui, nukreipti vartotoją į prisijungimo puslapį
-  //   })
-  //   .catch(error => {
-  //     console.error('Registration error:', error);
-  //     // Čia galite apdoroti klaidas, rodyti pranešimus vartotojui ir pan.
-  //   });
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signUp(formData) // Čia naudojate anksčiau importuotą signUp funkciją
+    signUp(formData)
       .then(response => {
         console.log(response.data);
-        // Įvykdykite veiksmus po sėkmingos registracijos
+        alert('Registarcija sėkminga');
+        navigate('/enterpage');
       })
       .catch(error => {
         console.error('Registration error:', error);
-        // Įvykdykite klaidų tvarkymą čia
       });
   };
 
-  return (
-    <form onSubmit={handleSubmit}>
+  return ( 
+  <div className='enter-page-container'>
+    <form className='form-row' onSubmit={handleSubmit}>
+    <label htmlFor="Username">Username</label>
       <input
         type="text"
         name="username"
@@ -61,6 +48,7 @@ const SignupForm = () => {
         placeholder="Username"
         required
       />
+      <label htmlFor="Email">Email</label>
       <input
         type="email"
         name="email"
@@ -69,6 +57,7 @@ const SignupForm = () => {
         placeholder="Email"
         required
       />
+      <label htmlFor="Password">Password</label>
       <input
         type="password"
         name="password"
@@ -78,7 +67,9 @@ const SignupForm = () => {
         required
       />
       <button type="submit">Register</button>
+      <Link className='link' to="/enterpage">Login</Link>
     </form>
+  </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createCar } from '../services/CarService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const CreateCarForm = () => {
   const [car, setCar] = useState({
@@ -39,37 +39,46 @@ const CreateCarForm = () => {
   };
 
   return (
-    <div>
+    <div className='main-container-home'>
+    <div className='form-row-home'>
       <h2>Sukurti naują automobilį</h2>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>{success}</div>}
-      <form onSubmit={handleSubmit}>
+      <form className='form-row-home' onSubmit={handleSubmit}>
         <div>
-          <label>Markė:</label>
+          <label>MAKE:</label>
           <input
             name="make"
             value={car.make}
+            placeholder="Dodge"
+            required
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label>Modelis:</label>
+          <label>MODEL:</label>
           <input
             name="model"
             value={car.model}
+            placeholder="Viper"
+            required
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label>Valstybiniai numeriai:</label>
+          <label>PLATENUMBER:</label>
           <input
             name="plateNumber"
             value={car.plateNumber}
+            placeholder="ABC123"
+            required
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Sukurti</button>
+        <button type="submit">Add Car</button>
+        <Link className='link' to="/home">Home</Link>
       </form>
+    </div>
     </div>
   );
 };

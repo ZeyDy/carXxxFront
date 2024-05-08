@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { getCarsByOwner, deleteCar } from '../services/CarService';
 import { useNavigate, Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import '../css/MyCars.css';
+import MyCarsImg from '../assets/myCars.png'
+
+Modal.setAppElement('#root');
 
 const MyCars = () => {
   const [cars, setCars] = useState([]);
   const [error, setError] = useState('');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedCarId, setSelectedCarId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +26,6 @@ const MyCars = () => {
   const loadCars = (token) => {
     getCarsByOwner(token)
       .then(response => {
-        console.log('Automobiliai gaunami iš serverio:', response.data);
         if (Array.isArray(response.data)) {
           setCars(response.data);
         } else {
@@ -27,47 +33,72 @@ const MyCars = () => {
         }
       })
       .catch(error => {
-        const errorMessage = error.response ? `Klaida gaunant automobilius: ${error.response.data.message}` : error.message;
-        console.error(errorMessage);
+        console.error('Error loading cars:', error);
         setError('Nepavyko gauti automobilių informacijos.');
       });
   };
 
-  const handleDeleteCar = (carId) => {
-    const token = localStorage.getItem('accessToken');
-    if (!token) {
-      setError('Nėra prieigos rakto. Būtina prisijungti.');
-      return;
-    }
+  const openModal = (carId) => {
+    setSelectedCarId(carId);
+    setModalIsOpen(true);
+  };
 
-    deleteCar(carId, token)
-      .then(() => {
-        setCars(cars.filter(car => car.id !== carId)); // Atnaujinti sąrašą po ištrinimo
-      })
-      .catch(error => {
-        const errorMessage = error.response ? `Klaida ištrinant automobilį: ${error.response.data.message}` : error.message;
-        console.error(errorMessage);
-        setError('Nepavyko ištrinti automobilio.');
-      });
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setSelectedCarId(null);
+  };
+
+  const handleDeleteCar = () => {
+    const token = localStorage.getItem('accessToken');
+    if (token && selectedCarId) {
+      deleteCar(selectedCarId, token)
+        .then(() => {
+          setCars(cars.filter(car => car.id !== selectedCarId));
+          closeModal();
+        })
+        .catch(error => {
+          console.error('Error deleting car:', error);
+          setError('Nepavyko ištrinti automobilio.');
+        });
+    }
   };
 
   if (error) {
-    return <div>Klaida: {error}</div>;
+    return <div className="error">{error}</div>;
   }
 
   return (
-    <div>
-      <h1>Mano automobiliai</h1>
-      <ul>
+    <div className='main-container-home'>
+      <img className="my-cars-img" src={MyCarsImg} alt="MyCars"></img>
+      <div className='car-list'>
         {cars.map(car => (
-          <li key={car.id}>
-            {car.make} {car.model} {car.plateNumber}
-            <button onClick={() => navigate(`/update/${car.id}`)}>Redaguoti</button>
-            <button onClick={() => handleDeleteCar(car.id)}>Ištrinti</button>
-          </li>
+          <div key={car.id} className="car-card">
+            <div className="car-info">
+              <p>{car.make}</p>
+              <p>{car.model}</p>
+              <p>{car.plateNumber}</p>
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Delete Confirmation"
+                className="modal"
+                overlayClassName="overlay"
+                >
+                  <h2>Are you sure you want to delete this car?</h2>
+                  <button onClick={handleDeleteCar}>Yes</button>
+                  <button onClick={closeModal}>No</button>
+              </Modal>
+            </div>
+            <div className="car-actions">
+              <button onClick={() => navigate(`/update/${car.id}`)}>Update</button>
+              <button onClick={() => openModal(car.id)}>Delete</button>
+            </div>
+            
+          </div>
         ))}
-      </ul>
-      <Link to="/home">Home</Link>
+      </div>
+      <Link className='link' to="/home">Home</Link>
+      
     </div>
   );
 };

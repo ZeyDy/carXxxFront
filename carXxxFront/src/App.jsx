@@ -19,14 +19,11 @@ function App() {
         <Routes>
           <Route path='/enterpage' element={<EnterPage/>}></Route>
           <Route path='/home' element={<HomePage />}></Route>
-          {/* // http://localhost:3000/login */}
           <Route path='/login' element={<LoginForm />}></Route>
           <Route path='/registration' element={<SignupForm />}></Route>
           <Route path='/mycars' element={<MyCars />}></Route>
           <Route path='/update/:carId' element={<UpdateCarForm/>}></Route>
           <Route path='/createcar' element={<CreateCarForm/>}></Route>
-
-          
         </Routes>
       </BrowserRouter>
     </>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { updateCar } from '../services/CarService';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 const UpdateCarForm = ({ currentCarData }) => {
   const [car, setCar] = useState(currentCarData || {});
   const [error, setError] = useState('');
   const { carId } = useParams();
-  const navigate = useNavigate(); // Naudojamas nukreipimui
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -15,7 +15,7 @@ const UpdateCarForm = ({ currentCarData }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('accessToken'); // Įsitikinkite, kad čia naudojate teisingą raktą
+    const token = localStorage.getItem('accessToken'); 
 
     if (!carId) {
       setError('Trūksta automobilio ID.');
@@ -29,8 +29,8 @@ const UpdateCarForm = ({ currentCarData }) => {
 
     updateCar(carId, car, token)
       .then((response) => {
-        alert('Automobilis sėkmingai atnaujintas.'); // Pridedame pranešimą apie sėkmę
-        navigate('/home'); // Nukreipia į pagrindinį puslapį po sėkmingo atnaujinimo
+        alert('Automobilis sėkmingai atnaujintas.'); 
+        navigate('/home'); 
       })
       .catch((error) => {
         const errorMessage = error.response ? error.response.data.message : error.message;
@@ -40,30 +40,31 @@ const UpdateCarForm = ({ currentCarData }) => {
   };
 
   return (
-    <div>
+    <div className='main-container-home'>
       {error && <div>Klaida: {error}</div>}
-      <form onSubmit={handleSubmit}>
+      <form className='form-row-home' onSubmit={handleSubmit}>
         <div>
-          <label>Markė:</label>
+          <label>MAKE:</label>
           <input
             name="make"
             value={car.make || ''}
             onChange={handleInputChange}
           />
-          <label>Modelis:</label>
+          <label>MODEL:</label>
           <input
             name="model"
             value={car.model || ''}
             onChange={handleInputChange}
           />
-          <label>Numeriai:</label>
+          <label>PLATENUMBER:</label>
           <input
             name="plateNumber"
             value={car.plateNumber || ''}
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Atnaujinti</button>
+        <button type="submit">Update</button>
+        <Link className='link' to="/mycars">My Cars</Link>
       </form>
     </div>
   );

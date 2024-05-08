@@ -37,24 +37,27 @@ const CarSelection = () => {
   const selectedCar = cars.find(car => car.id.toString() === selectedCarId);
 
   return (
-    <div>
-      <h1>Pasirinkite automobilį:</h1>
+    <div className='car-card'>
+      <div className='select-car' >
+      <h1>Select car:</h1>
       <select value={selectedCarId} onChange={handleCarChange}>
-        <option value="">Pasirinkite...</option>
+        <option value="">Select...</option>
         {cars.map(car => (
           <option key={car.id} value={car.id}>{car.make} {car.model}</option>
         ))}
       </select>
 
       {selectedCar && (
-        <div>
-          <h2>Pasirinktas automobilis:</h2>
-          <p>Markė: {selectedCar.make}</p>
-          <p>Modelis: {selectedCar.model}</p>
-          <p>Valstybinis numeris: {selectedCar.plateNumber}</p>
-          {/* Čia gali būti rodoma daugiau informacijos apie automobilį, jei reikia */}
+        <div className='car-card'>
+          
+          <div className='car-info' >
+            <p>MAKE: {selectedCar.make}</p>
+            <p>MODEL: {selectedCar.model}</p>
+            <p>PLATENUMBER: {selectedCar.plateNumber}</p>
+          </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

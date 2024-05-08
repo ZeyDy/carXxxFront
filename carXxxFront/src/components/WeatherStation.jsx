@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function OruStotelesKomponentas() {
+function WeatherStation() {
     const [stoteles, setStoteles] = useState([]);
     const [pasirinktasIrenginys, setPasirinktasIrenginys] = useState('');
 
@@ -8,24 +8,22 @@ function OruStotelesKomponentas() {
         fetch('https://eismoinfo.lt/weather-conditions-service')
             .then(response => response.json())
             .then(data => {
-                setStoteles(data); // Čia manome, kad gauname masyvą su visomis stotelėmis
+                setStoteles(data);
             })
             .catch(error => console.error('Klaida gaunant duomenis:', error));
     }, []);
 
-    // Funkcija, kuri keičia pasirinktą įrenginį
     const handleIrenginioKeitimas = (e) => {
         setPasirinktasIrenginys(e.target.value);
     };
 
-    // Ieškome pasirinktos stotelės duomenų pagal įrenginį
     const pasirinktosStotelesDuomenys = stoteles.find(stotele => stotele.irenginys === pasirinktasIrenginys);
 
     return (
         <div>
-            <h1>Pasirinkite įrenginį:</h1>
+            <h1 className='stasion-info' >Would you like to know the weather on the road? Just a few button clicks and your travels will become safer.</h1>
             <select value={pasirinktasIrenginys} onChange={handleIrenginioKeitimas}>
-                <option value="">Pasirinkite...</option>
+                <option value="">Select...</option>
                 {stoteles.map(stotele => (
                     <option key={stotele.id} value={stotele.irenginys}>{stotele.irenginys}</option>
                 ))}
@@ -39,11 +37,10 @@ function OruStotelesKomponentas() {
                     <p>Kelio danga: {pasirinktosStotelesDuomenys.kelio_danga}</p>
                     <p>Krituliai: {pasirinktosStotelesDuomenys.krituliu_tipas}</p>
                     <p>Vėjo greitis: {pasirinktosStotelesDuomenys.vejo_greitis_vidut} m/s</p>
-                    {/* ... atvaizduokite kitus duomenis pagal poreikį */}
                 </div>
             )}
         </div>
     );
 }
 
-export default OruStotelesKomponentas;
+export default WeatherStation;

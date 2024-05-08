@@ -37,7 +37,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form className='enter-page-main' onSubmit={handleSubmit}>
+    <form className='form-row' onSubmit={handleSubmit}>
       <label htmlFor="Username">Username</label>
       <input
         type="text"
