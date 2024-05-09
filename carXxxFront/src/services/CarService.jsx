@@ -5,12 +5,12 @@ const REST_API_URL = 'http://localhost:8080/api';
 const REST_API_AUTH_URL = 'http://localhost:8080/api/auth';
 
 export const getCar = (carId) => axios.get(REST_API_URL + '/' + carId);
-// export const changeCar = (carId, car) => axios.put(REST_API_URL + '/update/' + carId, car);
+
 
 export const signUp = (signUpRequest) => {
     return axios.post(`${REST_API_AUTH_URL}/signup`, signUpRequest, {
       headers: {
-        'Content-Type': 'application/json' // Užtikrina, kad siunčiamas JSON
+        'Content-Type': 'application/json' 
       }
     });
 };

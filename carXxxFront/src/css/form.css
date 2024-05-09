@@ -14,7 +14,7 @@ label {
     width: 400px;
     text-transform: uppercase;
     font-size: 11px;
-    color: black; /* Vidinės spalvos nustatymas (baltas tekstas) */
+    color: black; 
     text-shadow:
       -1px -1px 0 white,  
        1px -1px 0 white,
