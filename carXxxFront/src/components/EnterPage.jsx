@@ -1,6 +1,7 @@
 import LoginForm from "./LoginForm";
-import Logo from '../carxLogo.png'
+import Logo from '../assets/carxLogo.png'
 import {  Link } from "react-router-dom";
+import '../css/App.css'
 
 const EnterPage = () => {
     return (

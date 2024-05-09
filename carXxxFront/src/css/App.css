@@ -57,7 +57,7 @@ header.container {
 }
 
 .main-container-home {
-  background-image: url(./assets/carBackground.webp);
+  background-image: url(../assets/carBackground.webp);
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
@@ -71,7 +71,7 @@ header.container {
 
 .enter-page-container{
   width: 100vw;
-  background-image: url(./assets/enterPageCover.webp);
+  background-image: url(../assets/enterPageCover.webp);
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;

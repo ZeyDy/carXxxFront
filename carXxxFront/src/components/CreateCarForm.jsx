@@ -19,7 +19,7 @@ const CreateCarForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('accessToken'); // Įsitikinkite, kad token yra
+    const token = localStorage.getItem('accessToken');
 
     if (!token) {
       setError('Trūksta autentifikacijos rakto.');
@@ -41,7 +41,7 @@ const CreateCarForm = () => {
   return (
     <div className='main-container-home'>
     <div className='form-row-home'>
-      <h2>Sukurti naują automobilį</h2>
+      <h2>Add new car</h2>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>{success}</div>}
       <form className='form-row-home' onSubmit={handleSubmit}>

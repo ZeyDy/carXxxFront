@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from '../carxLogo.png'
+import Logo from '../assets/carxLogo.png'
 import DigitalClock from "./DigitalClock";
 import OruStotelesKomponentas from "./WeatherStation";
 import { useNavigate, Link } from "react-router-dom";
